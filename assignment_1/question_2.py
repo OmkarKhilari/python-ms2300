@@ -1,4 +1,4 @@
-# Question 1a
+# Question 2a
 
 import random as rand
 import matplotlib.pyplot as plt
