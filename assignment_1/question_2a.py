@@ -21,7 +21,7 @@ def probability_for_every_face(steps):
         count[i - 1] += 1
         probability_arr.append([j / sum(count) for j in count])
 
-    return np.array(probability_arr)  # Convert to NumPy array
+    return np.array(probability_arr)  
 
 def plot_probabilities(steps):
     probabilities = probability_for_every_face(steps)
@@ -32,9 +32,25 @@ def plot_probabilities(steps):
     plt.legend()
     plt.show()
 
+def see_convergence():
+    min_difference = np.inf    
+    convergence = 0
+
+    for i in range(len(probabilities)):
+        probability = probabilities[i, -1]
+        difference = abs(1/6 - probability)
+
+        if difference < min_difference:
+            min_difference = difference
+            convergence = i
+    return convergence
+
+
 steps = 10000
 probabilities = probability_for_every_face(steps)
-convergence = np.argmax(np.abs(probabilities[:, -1] - 1/6) < 1e-3)
+
+# print(probabilities)
+convergence = see_convergence()
 
 print(f"Convergence occurs at step: {convergence}")
 plot_probabilities(steps)
