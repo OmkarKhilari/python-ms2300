@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def generate_random_points(r, total_points):
+def generate_random_points(r, total_points): # generates coordinates
     random_x = np.random.uniform(0, r, total_points)
     random_y = np.random.uniform(0, r, total_points)
     
@@ -9,7 +9,7 @@ def generate_random_points(r, total_points):
     
     return points
 
-def find_area(r, total_points):
+def find_area(r, total_points): # finds area by fraction method
     points = generate_random_points(r, total_points)
     
     inside_circle = 0
@@ -35,8 +35,8 @@ def error(r,points):
 
 r = 50
 points = 100000
-print(original_area(r))
-print(find_area(r,points))
-print(error(r, points))
+print("Original area:", original_area(r))
+print("Estimated area:", find_area(r,points))
+print("Error:", error(r,points))
 
 
