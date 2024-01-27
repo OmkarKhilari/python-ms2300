@@ -29,6 +29,9 @@ def plot_probabilities(steps):
     for i in range(6):
         plt.plot(probabilities[:, i], label=f'Face {i + 1}')
 
+    plt.title('Probability Plot')
+    plt.xlabel('Steps')
+    plt.ylabel('P(x)')
     plt.legend()
     plt.show()
 
