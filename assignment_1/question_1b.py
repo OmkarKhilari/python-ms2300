@@ -1,15 +1,15 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def generate_random_points(r, total_points): # generates coordinates
-    random_x = np.random.uniform(0, r, total_points)
-    random_y = np.random.uniform(0, r, total_points)
+def generate_random_points(r, total_points):
+    x = np.random.uniform(-r, r, total_points)
+    y = np.random.uniform(-r, r, total_points)
     
-    points = list(zip(random_x, random_y))
+    points = list(zip(x, y)) # Using tuple to store coordinates
     
     return points
 
-def find_area(r, total_points): # finds area by fraction method
+def find_area(r, total_points):
     points = generate_random_points(r, total_points)
     
     inside_circle = 0
@@ -29,14 +29,26 @@ def find_area(r, total_points): # finds area by fraction method
 def original_area(r):
     return np.pi * r**2
 
-def error(r,points):
-    return 100 * (np.abs(original_area(r) - find_area(r,points))/original_area(r)) 
+def error(r, points):
+    return 100 * (np.abs(original_area(r) - find_area(r, points)) / original_area(r)) 
 
+def plot_diagram(r, points):
+    circle = plt.Circle((0, 0), r, color='r', fill=False, linestyle='solid',linewidth=2)
+    
+    fig, ax = plt.subplots()
+    ax.set_aspect('equal') 
+    ax.add_patch(circle)
+    
+    x, y = zip(*generate_random_points(r, points)) # Unpacking tuple made in generate points
 
-r = 50
-points = 100000
+    plt.scatter(x, y, color='b', marker='.')
+
+    plt.show()
+
+r = 39
+points = 1000
 print("Original area:", original_area(r))
-print("Estimated area:", find_area(r,points))
-print("Error:", error(r,points))
+print("Calculated area:", find_area(r, points))
+print("Error:", error(r, points))
 
-
+plot_diagram(r, points)
