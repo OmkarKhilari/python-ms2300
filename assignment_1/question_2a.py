@@ -35,18 +35,38 @@ def plot_probabilities(steps):
     plt.legend()
     plt.show()
 
-def see_convergence():
+# def see_convergence(tol=1e-3):
+#     min_average_difference = np.inf    
+#     convergence = 0
+
+#     for i in range(len(probabilities)):
+#         average_difference = np.mean(np.abs(1/6 - probabilities[i, :]))
+
+#         if average_difference < min_average_difference:
+#             min_average_difference = average_difference
+#             convergence = i
+
+#         if average_difference < tol:
+#             break
+
+#     return convergence
+
+def see_convergence(tol = 1e-3):
     min_difference = np.inf    
     convergence = 0
 
     for i in range(len(probabilities)):
-        probability = probabilities[i, -1]
-        difference = abs(1/6 - probability)
+        difference = np.mean(np.abs(1/6 - probabilities[i, :]))
 
         if difference < min_difference:
             min_difference = difference
-            convergence = i
+            convergence = i + 1
+
+        if difference < tol:
+            break    
+
     return convergence
+
 
 
 steps = 10000
