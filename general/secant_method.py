@@ -2,7 +2,7 @@
 
 # Defining Function
 def f(x):
-    return x**3 - 5*x - 9
+    return x**3 - 4
 
 # Implementing Secant Method
 
