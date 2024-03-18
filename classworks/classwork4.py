@@ -1,17 +1,25 @@
-import numpy as np
 import pandas as pd
 
-arr1 = np.array([1,2,3,4])
-arr2 = np.array([1.0, 1.2, 1.5, 1.8])
+def process_data_from_csv(cols, power):
+    data = pd.read_csv('alloy-confp-train-data_v2.csv')
 
-sqr_arr1 = arr1 ** 2
-sqr_arr2 = arr2 ** 2
+    # Check if selected columns contain non-numeric values
+    non_numeric_cols = [col for col in cols if not pd.api.types.is_numeric_dtype(data[col])]
 
-data = {
-    "x1" : arr1,
-    "y1" : arr2,
-    "sqr_x" : sqr_arr1,
-    "sqr_y" : sqr_arr2
-}
+    if non_numeric_cols:
+        print(f"Error: Columns {non_numeric_cols} contain non-numeric values.")
+        return None
 
-data_frame = pd.DataFrame(data)
+    selected_data = data[cols]
+
+    powered_data = selected_data ** power
+
+    return powered_data
+
+cols = ['C.al', 'C.cr']
+power = [2, 3]
+
+result = process_data_from_csv(cols, power)
+
+if result is not None:
+    print(result)
